@@ -1,0 +1,49 @@
+app:
+  name: "FEVER-X"
+  version: "1.0.0"
+  log_level: "INFO"
+  seed: 42
+
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  indexes_dir: "data/indexes"
+  sample_data_dir: "data/sample"
+  logs_dir: "logs"
+
+preprocessing:
+  lexical:
+    lowercase: true
+    remove_punctuation: true
+    remove_stopwords: true
+    stemming: true
+  semantic:
+    lowercase: false
+    remove_punctuation: false
+    remove_stopwords: false
+    stemming: false
+
+retrieval:
+  top_k_candidates: 50
+  rrf_k: 60
+  weights:
+    tfidf: 0.15
+    bm25: 0.25
+    sentence_transformer: 0.40
+    colbert: 0.20
+  entity_boost_factor: 1.25
+
+reranking:
+  top_k_evidence: 5
+  batch_size: 16
+
+verification:
+  neutral_threshold: 0.50
+  aggregation_strategy: "weighted_prob"  # Options: weighted_prob, max_confidence, majority_vote
+
+features:
+  use_colbert: false
+  use_entity_retrieval: true
+  use_query_expansion: true
+  use_llm_expansion: false
+  use_knowledge_graph: true
